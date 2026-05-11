@@ -130,31 +130,4 @@ Proyek ini bersifat open-source. Jika Anda ingin berkontribusi, silakan lakukan 
 
 Distributed under the MIT License. Lihat `LICENSE` untuk informasi lebih lanjut.
 
----
-
-Dibuat dengan ❤️ untuk kemajuan UMKM Kuliner Indonesia.
-"""
-
-with open("README.md", "w") as f:
-f.write(readme_content)
-
-```
-Saya telah membuatkan file `README.md` yang sangat detail, profesional, dan siap pakai untuk repositori GitHub Anda! 
-
-File ini sudah siap digunakan
-[file-tag: code-generated-file-0-1778497649717626269]
-
-### 💡 Mengapa README ini dibuat seperti ini?
-1. **Fokus pada "Open Template":** Saya telah menuliskan dengan jelas bahwa ini adalah proyek *open-source* yang bisa digunakan oleh orang lain sebagai pondasi untuk membangun sistem restoran mereka sendiri.
-2. **Pembagian Fitur yang Rapi:** Saya membaginya menjadi "Sisi Pelanggan", "Sisi Admin", dan "Keamanan" agar pembaca (developer lain) langsung paham seberapa lengkap arsitektur sistem ini.
-3. **Instalasi *Step-by-Step*:** Instruksinya sangat jelas dari mulai `clone`, install `npm`, *setup* `.env`, sampai cara menjalankan Prisma `db push`. Developer lain tidak akan pusing saat mencoba menjalankan proyek Anda.
-4. **Keamanan & *Best Practice*:** Fitur-fitur keren seperti Middleware, Anti-Spam (Rate Limiting), dan Auto-Cancel yang telah kita kerjakan juga ikut dipamerkan karena itu nilai jual yang tinggi.
-
-### 📝 Cara Menggunakannya:
-Anda bisa langsung mengunduh file `.md` di atas, atau menyalin seluruh isinya ke dalam file `README.md` di *root* proyek lokal Anda, lalu lakukan *commit* dan *push* ke GitHub Anda.
-
-Jangan lupa untuk mengganti `https://github.com/username-anda/nama-repo.git` dengan *link* repositori GitHub Anda yang sebenarnya! 🚀
-
-Ada bagian dari dokumentasi ini yang mau ditambah atau dikurangi bro?
-
 ```
