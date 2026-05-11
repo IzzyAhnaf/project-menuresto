@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:lmao2356@localhost:5432/proto_menuresto?schema=public"
+}
+
+enum OrderType{
+  DINE_IN
+  TAKEAWAY
+}
+
+enum PaymentStatus {
+  UNPAID      // Pelanggan baru checkout, belum scan QRIS
+  PAID        // Webhook dari payment gateway (Midtrans/Xendit) menyatakan sukses
+  EXPIRED     // Waktu bayar QRIS habis
+  FAILED      // Pembayaran gagal
+}
+
+enum KitchenStatus {
+  WAITING     // Menunggu pembayaran (dapur belum mulai masak)
+  PREPARING   // Sedang dimasak oleh dapur
+  READY       // Siap diantar (Dine-in) atau siap diambil (Takeaway)
+  COMPLETED   // Makanan sudah diterima pelanggan
+}
+
+model Table{
+  id        String  @id @default(uuid())
+  number    Int     @unique
+
+  orders    Order[]
+
+  createdAt DateTime @default(now())
+}
+
+model Category{
+  id        String     @id @default(uuid())
+  name      String     @unique
+  
+  items     MenuItem[]
+}
+
+model MenuItem {
+  id          String      @id @default(uuid())
+  name        String
+  description String?     @db.Text
+  price       Decimal     @db.Decimal(10, 2)
+  imageUrl    String?     
+  isAvailable Boolean     @default(true)
+  
+  categoryId  String
+  category    Category    @relation(fields: [categoryId], references: [id])
+  
+  orderItems  OrderItem[] 
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  customerName    String?
+  type            OrderType
+  
+  paymentStatus   PaymentStatus @default(UNPAID)
+  kitchenStatus   KitchenStatus @default(WAITING)
+  
+  totalAmount     Decimal       @db.Decimal(10, 2)
+  
+  paymentMethod   String?       @default("QRIS") // Bisa diisi nama provider jika perlu
+  transactionId   String?       @unique // ID transaksi dari Payment Gateway (misal: Midtrans Order ID)
+  paidAt          DateTime?     // Waktu pembayaran berhasil
+  
+  tableId         String?
+  table           Table?        @relation(fields: [tableId], references: [id])
+  
+  items           OrderItem[]
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model OrderItem {
+  id          String   @id @default(uuid())
+  quantity    Int      @default(1)
+  notes       String?  
+  
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  menuItemId  String
+  menuItem    MenuItem @relation(fields: [menuItemId], references: [id])
+}
