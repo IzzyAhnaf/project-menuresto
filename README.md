@@ -1,4 +1,3 @@
-```
 # 🍽️ RestoAdmin - Digital Restaurant Management System
 
 **RestoAdmin** adalah sebuah template open-source *full-stack* yang dirancang untuk mendigitalkan operasional restoran secara mandiri. Proyek ini mencakup ekosistem lengkap, mulai dari sistem pemesanan mandiri oleh pelanggan (via QR Code) hingga manajemen dapur, kasir, dan inventaris menu bagi pemilik restoran.
